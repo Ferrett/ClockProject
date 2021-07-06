@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -44,6 +45,7 @@ namespace WindowsFormsApp11
             this.ResumeLayout(false);
             //this.Paint += Form1_Paint;
 
+            
             this.clock = new CustomClock();
             this.clock.Size = new Size(700, 700);
             this.clock.Location = new Point(150,150);
