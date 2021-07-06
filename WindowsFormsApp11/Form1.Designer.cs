@@ -1,5 +1,6 @@
 ﻿
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp11
 {
@@ -41,14 +42,34 @@ namespace WindowsFormsApp11
             this.Name = "Form1";
             this.Text = "ClockApp";
             this.ResumeLayout(false);
+            //this.Paint += Form1_Paint;
 
             this.clock = new CustomClock();
             this.clock.Size = new Size(700, 700);
             this.clock.Location = new Point(150,150);
+
+
             Controls.Add(this.clock);
+            DoubleBuffered = true;
+           
+        }
+
+        private void Test2(Graphics g)
+        {
+            g.TranslateTransform(Width / 2, Height / 2);
+            g.RotateTransform(Rotate);
+            g.FillRegion(new SolidBrush(Color.Black), new Region(new Rectangle(0, 0, 10, 300)));
+        }
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+             Test2(e.Graphics);
 
         }
+        int Rotate = 0;
+       
+
         CustomClock clock;
+        
         #endregion
     }
 }

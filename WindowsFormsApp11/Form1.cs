@@ -26,7 +26,6 @@ namespace WindowsFormsApp11
 
         void timer_Tick(object sender, EventArgs e)
         {
-            clock.Rotate++;
             clock.Invalidate();
         }
     }

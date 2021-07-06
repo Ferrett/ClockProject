@@ -17,7 +17,7 @@ namespace WindowsFormsApp11
 
         readonly int Multiplier;
 
-        public int Rotate = 0;
+        public double RotationAngle = 0;
         public CustomClock()
         {
             this.Paint += Draw;
@@ -27,7 +27,8 @@ namespace WindowsFormsApp11
             OutlineColor = Color.Black;
             MainColor = Color.LightGray;
 
-            Multiplier = 80;   
+            Multiplier = 80;
+            DoubleBuffered = true;
         }
 
         public CustomClock(bool turnedOn, Color backColor, Color onColor, Color offColor, Color circleColor)
@@ -41,19 +42,18 @@ namespace WindowsFormsApp11
 
         public void Draw(object sender, PaintEventArgs e)
         {
-            var a = this.CreateGraphics();
+            RotationAngle+=0.1;
+            UpdateArrows(e.Graphics);
+        }
+        public void UpdateArrows(Graphics g)
+        {
+            g.FillEllipse(new SolidBrush(OutlineColor), new Rectangle(0, 0, Width, Height));
+            g.FillEllipse(new SolidBrush(MainColor), new Rectangle(15, 15, Width - 30, Height - 30));
+            g.FillRectangle(new SolidBrush(ArrowColor), new Rectangle(Width / 2, Height / 2, Width / Multiplier, Height - 10));
 
-            a.FillEllipse(new SolidBrush(OutlineColor), new Rectangle(0,0, Width, Height));
-            a.FillEllipse(new SolidBrush(MainColor), new Rectangle(15, 15, Width-30, Height-30));
-            a.FillRectangle(new SolidBrush(ArrowColor), new Rectangle(Width / 2, Height / 2, Width / Multiplier, Height - 10));
-
-           //a.TranslateTransform(200, 0);
-            a.RotateTransform(Rotate);
-           
-            //a.
-            a.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(Width / 2, Height / 2, Width / Multiplier, Height - 10)));
-
-           
+            g.TranslateTransform(Width / 2, Height / 2);
+            g.RotateTransform((float)RotationAngle);
+            g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0,0,10,300)));
         }
     }
 }
