@@ -28,9 +28,9 @@ namespace WindowsFormsApp11
             MainColor = Color.LightGray;
 
             RotationAngleSecondsArrow = time.Second * 6 + 180;
-            RotationAngleMinutesArrow = time.Minute * 6 + 146;
-            RotationAngleHoursArrow = time.Hour * 30 + 180 + (360 - time.Minute * 6) / 60; ;
-
+            RotationAngleMinutesArrow =55 * 6 + 180;
+            RotationAngleHoursArrow = time.Hour * 30 + 180 + (time.Minute /2); 
+           
             DoubleBuffered = true;
         }
 
@@ -42,10 +42,10 @@ namespace WindowsFormsApp11
             OutlineColor = Color.Black;
             MainColor = Color.LightGray;
 
-            RotationAngleSecondsArrow = time.Second*6+180;
-            RotationAngleMinutesArrow = time.Minute * 6+180;
-            RotationAngleHoursArrow = time.Hour * 30+180 + (360- time.Minute *6)/ 60;
- 
+            RotationAngleSecondsArrow = time.Second * 6 + 180;
+            RotationAngleMinutesArrow = 55 * 6 + 180;
+            RotationAngleHoursArrow = time.Hour * 30 + 180 + (time.Minute / 2);
+
             DoubleBuffered = true;
         }
 
@@ -55,8 +55,6 @@ namespace WindowsFormsApp11
             RotationAngleMinutesArrow += 0.0016;
             RotationAngleHoursArrow += 0.000026;
             UpdateArrows(e.Graphics);
-            
-            //DrawNumbers(e.Graphics);
         }
         public void DrawNumbers(Graphics g)
         {
@@ -89,9 +87,9 @@ namespace WindowsFormsApp11
             g.RotateTransform((float)RotationAngleHoursArrow);
             g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0, 0, 10, 270)));
 
-
-            g.RotateTransform((float)RotationAngleMinutesArrow);
+            g.RotateTransform((float)RotationAngleMinutesArrow - (float)RotationAngleHoursArrow%360);
             g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0,0,8, 290)));
+
 
             g.RotateTransform((float)(RotationAngleSecondsArrow));
             g.FillRectangle(new SolidBrush(ArrowColor), new Rectangle(0,0, 5, 300));
