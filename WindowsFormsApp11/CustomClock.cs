@@ -28,7 +28,7 @@ namespace WindowsFormsApp11
             MainColor = Color.LightGray;
 
             RotationAngleSecondsArrow = time.Second * 6 + 180;
-            RotationAngleMinutesArrow =55 * 6 + 180;
+            RotationAngleMinutesArrow =time.Minute * 6 + 180;
             RotationAngleHoursArrow = time.Hour * 30 + 180 + (time.Minute /2); 
            
             DoubleBuffered = true;
@@ -43,7 +43,7 @@ namespace WindowsFormsApp11
             MainColor = Color.LightGray;
 
             RotationAngleSecondsArrow = time.Second * 6 + 180;
-            RotationAngleMinutesArrow = 55 * 6 + 180;
+            RotationAngleMinutesArrow = time.Minute * 6 + 180;
             RotationAngleHoursArrow = time.Hour * 30 + 180 + (time.Minute / 2);
 
             DoubleBuffered = true;
@@ -72,31 +72,27 @@ namespace WindowsFormsApp11
             g.DrawString("10", new Font("Times New Roman", 50), new SolidBrush(Color.Black), 60, 175);
             g.DrawString("11", new Font("Times New Roman", 50), new SolidBrush(Color.Black), 160, 60);
         }
-        
+
 
         public void UpdateArrows(Graphics g)
         {
- 
-
             g.FillEllipse(new SolidBrush(OutlineColor), new Rectangle(0, 0, Width, Height));
-            g.FillEllipse(new SolidBrush(MainColor), new Rectangle(15, 15, Width - 30, Height - 30));
+            g.FillEllipse(new SolidBrush(MainColor), new Rectangle(Width/46, Width / 46, Width - Width / 23, Height - Width / 23));
 
             DrawNumbers(g);
+           
             g.TranslateTransform(Width / 2, Height / 2);
 
+            
             g.RotateTransform((float)RotationAngleHoursArrow);
-            g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0, 0, 10, 270)));
+            g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0, 0, 13, Width / 2 - Width / 7)));
 
             g.RotateTransform((float)RotationAngleMinutesArrow - (float)RotationAngleHoursArrow%360);
-            g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0,0,8, 290)));
+            g.FillRegion(new SolidBrush(ArrowColor), new Region(new Rectangle(0,0,8, Width / 2 - Width / 9)));
 
 
             g.RotateTransform((float)(RotationAngleSecondsArrow));
-            g.FillRectangle(new SolidBrush(ArrowColor), new Rectangle(0,0, 5, 300));
-
-
-           
-            
+            g.FillRectangle(new SolidBrush(ArrowColor), new Rectangle(0,0, 5, Width/2- Width / 10));
 
         }
     }

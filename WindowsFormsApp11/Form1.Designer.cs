@@ -52,24 +52,7 @@ namespace WindowsFormsApp11
 
 
             Controls.Add(this.clock);
-            DoubleBuffered = true;
-           
         }
-
-        private void Test2(Graphics g)
-        {
-            g.TranslateTransform(Width / 2, Height / 2);
-            g.RotateTransform(Rotate);
-            g.FillRegion(new SolidBrush(Color.Black), new Region(new Rectangle(0, 0, 10, 300)));
-        }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-             Test2(e.Graphics);
-
-        }
-        int Rotate = 0;
-       
-
         CustomClock clock;
         
         #endregion
