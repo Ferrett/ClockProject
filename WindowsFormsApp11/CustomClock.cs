@@ -10,6 +10,7 @@ namespace WindowsFormsApp11
 {
     public class CustomClock : Control
     {
+        readonly Color aboba;
         readonly Color ArrowColor;
         readonly Color OutlineColor;
         readonly Color MainColor;
